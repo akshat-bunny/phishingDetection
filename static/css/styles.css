@@ -1,0 +1,80 @@
+/* Ensure the page covers full viewport height and centers content */
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #eceff6 100%);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
+    background-color: #fff;
+}
+
+/* Input fields with rounded-pill design */
+.form-control {
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #333;
+    background-color: #fff;
+    box-shadow: none;
+}
+
+/* Rounded-pill button */
+.btn-dark {
+    background-color: #333;
+    border-color: #333;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-dark:hover {
+    background-color: #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Link styling */
+.text-dark {
+    color: #333 !important;
+}
+
+.text-dark:hover {
+    color: #000;
+}
+
+/* Footer should stay at the bottom */
+.footer {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: #6c757d;
+}
+
+@media (max-width: 576px) {
+    .card {
+        max-width: 100%;
+    }
+}

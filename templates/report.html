@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Report Phishing</h2>
+    <p class="text-center text-muted mb-4">Please enter the URL of the phishing site you want to report.</p>
+
+    <!-- Form for reporting phishing -->
+    <form id="report-form" method="POST" action="/report" class="mb-4"> <!-- action set to /report -->
+        {{ form.hidden_tag() }}
+        <div class="input-group mb-3">
+            {{ form.url(class="form-control", placeholder="Enter phishing URL", required=True) }}
+            <button class="btn btn-danger" type="submit">Report Phishing</button>
+        </div>
+
+        <!-- Display form errors if any -->
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Please correct the errors below.
+                <ul>
+                    {% for field, errors in form.errors.items() %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </form>
+
+    <!-- Note for the user -->
+    <div class="alert alert-info" role="alert">
+        <strong>Note:</strong> Reporting a URL helps keep our community safe. Thank you for your vigilance!
+    </div>
+</div>
+
+{% block styles %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light background for a clean look */
+        font-family: 'Arial', sans-serif; /* Modern font */
+    }
+
+    h2 {
+        font-size: 2.5rem; /* Increase heading size */
+        font-weight: bold; /* Bold for emphasis */
+        color: #343a40; /* Darker text color */
+    }
+
+    .input-group input {
+        border-radius: 0.5rem; /* Rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .input-group .btn-danger {
+        border-radius: 0.5rem; /* Rounded corners for button */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+    }
+
+    .input-group .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+
+    .alert {
+        border-radius: 0.5rem; /* Rounded corners for alerts */
+        padding: 15px; /* Added padding */
+    }
+
+    .alert .close {
+        outline: none; /* Remove outline */
+    }
+</style>
+{% endblock %}
+
+{% endblock %}

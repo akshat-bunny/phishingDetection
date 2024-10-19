@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Include Common Navbar -->
+<!-- Phishing Detection Section -->
+<div class="container mt-5">
+    <h2 class="text-center text-dark mb-4">Phishing Detection</h2>
+    <p class="text-center mb-4 text-muted">Enter a domain to check if it has been flagged as phishing.</p>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form method="POST" class="mb-4">
+                        {{ form.hidden_tag() }}
+                        <div class="input-group mb-3">
+                            {{ form.domain(class="form-control", placeholder="Enter domain") }}
+                            <button class="btn btn-primary" type="submit">{{ form.submit.label.text }}</button>
+                        </div>
+                        {% for error in form.domain.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </form>
+
+                    <!-- New alert section for showing the malicious status -->
+                    {% if result or is_malicious %}
+                        <div class="mt-4 alert {{ 'alert-danger' if is_malicious else 'alert-success' }} text-center" role="alert">
+                            <h5>
+                                <i class="fas {{ 'fa-exclamation-triangle' if is_malicious else 'fa-check-circle' }} mr-2"></i>
+                                The domain '<span class="fw-bold">{{ form.domain.data }}</span>' is found to be {{ 'malicious' if is_malicious else 'safe' }}.
+                            </h5>
+                        </div>
+                    {% endif %}
+
+                    <div class="mt-4 card p-3">
+                        <h5 class="text-primary">Details:</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Domain:</strong> {{ form.domain.data }}</li>
+                            <li class="list-group-item"><strong>Status:</strong> {{ 'Malicious' if is_malicious else 'Safe' }}</li>
+                            {% if result %}
+                                <li class="list-group-item"><strong>Checked at:</strong> {{ result.last_analysis_date }}</li>
+                                <li class="list-group-item"><strong>Malicious Votes:</strong> {{ malicious_votes }}</li>
+                                <li class="list-group-item"><strong>Harmless Votes:</strong> {{ harmless_votes }}</li>
+                                <li class="list-group-item"><strong>Last analysis date:</strong> {{ result.last_analysis_date }}</li>
+
+                            {% elif is_malicious %}
+                                <li class="list-group-item"><strong>Threat level:</strong> {{ result.threat_level }}</li>
+                                <li class="list-group-item"><strong>Malicious Votes:</strong> {{ malicious_votes }}</li>
+                                <li class="list-group-item"><strong>Harmless Votes:</strong> {{ harmless_votes }}</li>
+                                <li class="list-group-item"><strong>Last analysis date:</strong> {{ result.last_analysis_date }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block styles %}
+<style>
+    body {
+        background-color: #f0f2f5; /* A light grayish background for a clean and modern look */
+        font-family: 'Arial', sans-serif; /* More modern sans-serif font */
+    }
+
+    h2 {
+        font-size: 2.5rem; /* Larger heading for emphasis */
+        font-weight: 600; /* Semi-bold for better visibility */
+    }
+
+    .card {
+        border-radius: 1rem; /* More rounded corners for a soft look */
+        border: none; /* Remove border for a cleaner appearance */
+        background-color: #ffffff; /* White background for the card */
+    }
+
+    .alert {
+        font-size: 1.2rem; /* Larger font for readability */
+        border-radius: 0.5rem; /* Rounded corners */
+        padding: 15px; /* Added padding for a better look */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Bootstrap primary color */
+        border: none; /* Remove default border */
+        border-radius: 0.5rem; /* Rounded corners */
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .input-group input {
+        border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners for the input field */
+    }
+
+    .input-group button {
+        border-radius: 0 0.5rem 0.5rem 0; /* Rounded corners for the button */
+    }
+
+    .list-group-item {
+        font-size: 1.1rem; /* Slightly larger font for list items */
+    }
+
+    /* Add media queries for responsiveness */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem; /* Smaller heading for smaller screens */
+        }
+
+        .card {
+            margin: 0 10px; /* Reduce margin for small screens */
+        }
+    }
+</style>
+{% endblock %}
+{% endblock %}

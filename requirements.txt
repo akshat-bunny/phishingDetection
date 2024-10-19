@@ -1,0 +1,7 @@
+Flask
+Flask-WTF
+Flask-Login
+pyodbc
+requests
+python-dotenv
+flask-jwt-extended

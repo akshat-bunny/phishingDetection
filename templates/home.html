@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5 text-center text-dark">Welcome to TestPhish</h1>
+    <p class="lead text-center mb-4 text-muted">Join us in the fight against phishing. Help us detect and report malicious URLs to keep our community safe.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg hover-effect">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Detect Phishing</h5>
+                    <p class="card-text">Enter a domain to check whether it has been flagged as phishing.</p>
+                    <a href="{{ url_for('detect') }}" class="btn btn-primary rounded-pill">Detect Phishing</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg hover-effect">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-danger">Report Phishing</h5>
+                    <p class="card-text">Report a suspicious URL to help others avoid phishing attacks.</p>
+                    <a href="{{ url_for('report') }}" class="btn btn-danger rounded-pill">Report Phishing</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light background for a classy look */
+        font-family: Arial, sans-serif; /* Improved font for better readability */
+    }
+
+    .card {
+        transition: transform 0.3s; /* Smooth transition for hover effect */
+    }
+
+    .hover-effect:hover {
+        transform: translateY(-5px); /* Raise the card on hover */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    }
+
+    .card-title {
+        font-size: 1.5rem; /* Increased font size for titles */
+        margin-bottom: 1rem; /* Spacing between title and text */
+    }
+
+    .card-text {
+        font-size: 1.1rem; /* Increased font size for better readability */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Larger button padding for better clickability */
+        font-size: 1rem; /* Standard font size for buttons */
+    }
+</style>
+{% endblock %}
